@@ -32,4 +32,9 @@ class Follower
        generation = @@all.select {|f| f.age == integer} if generation.length > 0
     end
 
+    def my_cult_slogans
+        self.cults.map {|cult| cult.slogan}
+    end
+
+
 end

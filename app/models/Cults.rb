@@ -45,4 +45,33 @@ class Cult
         @@all.select {|cult| cult.founding_year == year}
     end
 
+    def average_age
+        age_sum = self.all_followers.sum{|f| f.age}.to_f
+        num_followers = self.cult_population.to_f
+        average_age = age_sum/num_followers
+    end
+
+    def my_followers_motos
+        self.all_followers.map {|f| f.life_moto}
+    end
+
+    def self.least_popular
+        @@all.map{|cult| cult.cult_population}.min
+    end
+
+    def self.most_common_location
+        locs = @@all.map{|cult| cult.location}
+        uniq_locs = locs.uniq
+        counts = []
+        uniq_locs.each do |loc|
+            count = 0
+            count = locs.count(loc)
+            counts << count
+        end
+        maxim = counts.max
+        max_index = counts.index(maxim)
+        uniq_locs[max_index]
+
+    end
+
 end
